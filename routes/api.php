@@ -87,7 +87,7 @@ Route::get('jadwalAkademik', [JadwalAkademikController::class, 'index']);
 Route::put('jadwalAkademik/{id}', [JadwalAkademikController::class, 'update']);
 Route::delete('jadwalAkademik/{id}', [JadwalAkademikController::class, 'destroy']);
 
-Route::post('nilai', [NilaiController::class, 'store']);
+// Route::post('nilai', [NilaiController::class, 'store']);
 Route::get('nilaiAkademik', [NilaiController::class, 'nilaiAkademik']);
 Route::get('nilaiKelas', [NilaiController::class, 'nilaiKelas']);
 Route::put('nilai/{id}', [NilaiController::class, 'update']);
@@ -116,6 +116,9 @@ Route::get('pembayaran/{id}', [PembayaranController::class, 'detailPembayaran'])
 
 
 Route::get('siswa/{id}', [AdminViewController::class, 'siswa']);
+Route::get('semuaSiswa', [AdminViewController::class, 'semuaSiswa']);
+Route::get('dashboard', [AdminViewController::class, 'dashboard']);
+Route::get('semesterPublish', [AdminViewController::class, 'semesterPublish']);
 Route::post('semester', [SemesterController::class, 'store']);
 Route::get('semester', [SemesterController::class, 'index']);
 Route::get('semesterSekarang', [SemesterController::class, 'semesterSekarang']);

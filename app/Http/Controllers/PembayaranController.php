@@ -12,7 +12,7 @@ class PembayaranController extends Controller
      */
     public function index(Request $request)
     {
-        $pembayaran = Pembayaran::where('kelas_id', $request->kelas_id)->with(['siswa','semester'])->get();
+        $pembayaran = Pembayaran::where('kelas_id', $request->kelas_id)->where('semester_id', $request->semester)->with(['siswa','semester'])->get();
         return response()->json($pembayaran);
     }
     public function detailPembayaran($id)

@@ -50,7 +50,7 @@ class NilaiJadwalController extends Controller
                     'siswa_id' => $siswas->id,
                     'nilai' => 0,
                     'keterangan' => ""
-                ]);
+                ]); 
             }
         }
         } else{

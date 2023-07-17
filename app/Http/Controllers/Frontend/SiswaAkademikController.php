@@ -44,13 +44,13 @@ class SiswaAkademikController extends Controller
 
     public function nilaiAkademikSiswa(Request $request) { 
 
-        $nilais = Nilai::where('siswa_id', Auth::id())->where('semester_id', $request->semester)->with(['pelajaran','semester'])->get();
+        $nilais = Nilai::where('siswa_id',Auth::id())->where('semester_id', $request->semester)->with(['pelajaran','semester'])->get();
 
-        $ratas = Nilai::where('siswa_id', Auth::id())->where('semester_id', $request->semester)->avg('nilai');
+        $ratas = Nilai::where('siswa_id',Auth::id())->avg('nilai');
      
-        $nilaiTotal = Nilai::where('siswa_id', Auth::id())->where('semester_id', $request->semester)->sum('nilai');
+        $nilaiTotal = Nilai::where('siswa_id',Auth::id())->sum('nilai');
         $rata = number_format($ratas, 1, '.', '');
-        $pelajaran = Nilai::where('siswa_id', Auth::id())->where('semester_id', $request->semester)->count();
+        $pelajaran = Nilai::where('siswa_id',Auth::id())->count();
 
      
         return response()->json([

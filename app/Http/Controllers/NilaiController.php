@@ -64,35 +64,39 @@ class NilaiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $keterangan = "";
-        if($request->nilai >= 95){
-          $keterangan = "sangat baik";
-        } 
-        else if($request->nilai >= 85){
-          $keterangan = "baik";
-        } 
-        else if($request->nilai >= 75){
-          $keterangan = "memuaskan";
-        } 
+    // public function store(Request $request)
+    // {
+       
         
-        $nilai = Nilai::create([
-            'semester_id' => $request->semester_id,
-            'pelajaran_id' => $request->pelajaran_id,
-            'kelas_id' => $request->kelas_id,
-            'siswa_id' => $request->siswa_id,
-            'nilai' => $request->nilai,
-            'status' => $request->status,
-            'keterangan' => $keterangan,
         
-        ]);
 
-        return response()->json([
-            'data' => $nilai,
-            'message'=>"data berhasil ditambahkan"
-        ]); 
-    }
+    //     $keterangan = "";
+    //     if($request->nilai >= 95){
+    //       $keterangan = "sangat baik";
+    //     } 
+    //     else if($request->nilai >= 85){
+    //       $keterangan = "baik";
+    //     } 
+    //     else if($request->nilai >= 75){
+    //       $keterangan = "memuaskan";
+    //     } 
+        
+    //     $nilai = Nilai::create([
+    //         'semester_id' => $request->semester_id,
+    //         'pelajaran_id' => $request->pelajaran_id,
+    //         'kelas_id' => $request->kelas_id,
+    //         'siswa_id' => $request->siswa_id,
+    //         'nilai' => $request->nilai,
+    //         'status' => $request->status,
+    //         'keterangan' => $keterangan,
+        
+    //     ]);
+
+    //     return response()->json([
+    //         'data' => $nilai,
+    //         'message'=>"data berhasil ditambahkan"
+    //     // ]); 
+    // }
 
     /**
      * Display the specified resource.
@@ -109,30 +113,25 @@ class NilaiController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        
         $nilai = Nilai::find($id);
-        $nilai->nilai = $request->nilai;
-        $kkm = $nilai->pelajaran->kkm ;
-        if($request->nilai >= 100){
-            $nilai->status = 'sangat baik';
+        $nilai = $request->nilai;
+        $kkm = $nilai->pelajaran->kkm;
+        $jarak = $nilai - $kkm; 
 
-        } else if($request->nilai > $kkm ){
-                if($request->nilai - $kkm >=5 && $request->nilai - $kkm <=10 ){
-                    $nilai->status = 'baik';
+                if ($nilai >= $kkm) {
+                if ($jarak >= 15) {
+                    $nilai->status = "Sangat Baik";
+                } else if ($jarak >= 10) {
+                    $nilai->status = "Baik";
+                } else if ($jarak >= 5) {
+                    $nilai->status = "Cukup";
+                } else {
+                    $nilai->status = "Kurang";
                 }
-                if($request->nilai - $kkm >=10 && $request->nilai - $kkm <=15 ){
-                    $nilai->status = 'memuaskan';
-                } else{
-                    $nilai->status = 'cukup memuaskan';
-                }
-        } else {
-            $nilai->status = 'tidak memuaskan';
-        }
-
-        if($request->nilai >= $nilai->nilai){
-            $nilai->keterangan = 'Lulus';
-        } else{
-            $nilai->keterangan = 'tidak lulus';
-        }
+            } else {
+                $nilai->status = "Belum Tuntas";
+            }
 
         $nilai->save();
         

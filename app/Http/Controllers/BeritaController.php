@@ -13,7 +13,7 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        $berita = Berita::with('kategori')->get();
+        $berita = Berita::all();
         return response()->json([
             'data' => $berita
         ]);
@@ -30,7 +30,6 @@ class BeritaController extends Controller
     public function store(Request $request)
     {
         $berita = Berita::create([
-            'kategori_id' => $request->kategori,
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'foto' => $request->foto
@@ -56,7 +55,6 @@ class BeritaController extends Controller
     public function update(Request $request, $id)
     {
         $berita = Berita::find($id);
-        $berita->kategori_id = $request->kategori;
         $berita->judul =  $request->judul;
         $berita->deskripsi =  $request->deskripsi;
         $berita->foto =  $request->foto;

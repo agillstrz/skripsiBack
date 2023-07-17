@@ -12,7 +12,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::with('jenjang')->latest()->paginate(10);
+        $kelas = Kelas::latest()->paginate(10);
         return response()->json([
             'data' => $kelas
         ]);
@@ -29,7 +29,6 @@ class KelasController extends Controller
     {
         $kelas = Kelas::create([
             'nama' => $request->nama,
-            'jenjang_id' => $request->jenjang_id
     
         ]);
 
@@ -55,7 +54,6 @@ class KelasController extends Controller
     {
         $kelas = Kelas::find($id);
         $kelas->nama = $request->nama;
-        $kelas->jenjang_id = $request->jenjang_id;
         
         $kelas->save();
         return response()->json([

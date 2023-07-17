@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('nomor_hp')->nullable();
             $table->string('email')->nullable();
+            $table->string('gender')->nullable();
             $table->string('ibu_kandung')->nullable();
             $table->string('nik')->nullable();
             $table->string('foto')->nullable();

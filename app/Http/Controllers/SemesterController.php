@@ -12,7 +12,7 @@ class SemesterController extends Controller
         return response()->json($semester);
     }
     public function semesterSekarang(){
-        $semester = Semester::first();
+        $semester = Semester::latest()->first();
         return response()->json($semester);
     }
     

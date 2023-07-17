@@ -46,8 +46,5 @@ class Kelas extends Model
     }
 
 
-    public function jenjang(){
-        return $this->belongsTo(Jenjang::class);
-    }
-    
+ 
 }

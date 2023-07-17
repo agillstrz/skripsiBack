@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kategori_id');
             $table->string('judul');
             $table->text('deskripsi');
             $table->string('foto');
             $table->timestamps();
 
             
-            $table->foreign('kategori_id')->references('id')->on('kategori_beritas')->onDelete('cascade');
         });
     }
 

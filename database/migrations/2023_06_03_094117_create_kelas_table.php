@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('jenjang_id');
             $table->string('nama');
             $table->timestamps();
 
