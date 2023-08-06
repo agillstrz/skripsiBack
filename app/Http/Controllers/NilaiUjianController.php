@@ -22,37 +22,10 @@ class NilaiUjianController extends Controller
     {
         $nilai = NilaiUjian::find($id);
         $nilai->nilai = $request->nilai;
-        $kkm = $nilai->pelajaran->kkm ;
-        if($request->nilai >= 100){
-            $nilai->status = 'sangat baik';
-
-        } else if($request->nilai >= $kkm ){
-                if(($request->nilai - $kkm) <=5 && ($request->nilai - $kkm) <=10 ){
-                    $nilai->status = 'baik';
-                }
-                if($request->nilai - $kkm >=10 && $request->nilai - $kkm <=15 ){
-                    $nilai->status = 'memuaskan';
-                } else{
-                    $nilai->status = 'cukup memuaskan';
-                }
-        } else {
-            $nilai->status = 'tidak memuaskan';
-        }
-
-        if($request->nilai >= $nilai->nilai){
-            $nilai->keterangan = 'Lulus';
-        } else{
-            $nilai->keterangan = 'tidak lulus';
-        }
-
         $nilai->save();
         
         return response()->json($nilai);
-        // $nilai->save();
-        // return response()->json([
-        //     'data' => $nilai,
-        //     'message'=>"data berhasil diperbarui"
-        // ]); 
+  
     }
 
 

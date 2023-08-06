@@ -18,12 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('semester_id');
             $table->unsignedBigInteger('kelas_id');
             $table->bigInteger('pelajaran_id');
-            $table->string('keterangan')->default('-');
-            $table->string('status')->default('-');
             $table->timestamps();
-
-
-
         });
     }
 

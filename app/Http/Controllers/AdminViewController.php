@@ -29,15 +29,15 @@ public function semuaSiswa(Request $request) {
     ]);
 }
 public function dashboard() {
-    $siswa = Siswa::all()->count();
-    $guru = Guru::all()->count();
-    $kelas = Kelas::all()->count();
-    $Pelajaran = Pelajaran::all()->count();
+    $siswa = Siswa::count();
+    $guru = Guru::count();
+    $kelas = Kelas::count();
+    $Pelajaran = Pelajaran::count();
     return response()->json([
         'siswa' => $siswa,
         'guru' => $guru,
         'kelas' => $kelas,
-        'Pelajaran' => $Pelajaran,
+        'pelajaran' => $Pelajaran,
     ]);
 }
 }

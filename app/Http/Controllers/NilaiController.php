@@ -114,33 +114,36 @@ class NilaiController extends Controller
     public function update(Request $request,  $id)
     {
         
-        $nilai = Nilai::find($id);
+        $nilais = Nilai::find($id);
         $nilai = $request->nilai;
-        $kkm = $nilai->pelajaran->kkm;
+        $kkm = $nilais->pelajaran->kkm;
         $jarak = $nilai - $kkm; 
+        $nilais->nilai =  $request->nilai;
 
                 if ($nilai >= $kkm) {
-                if ($jarak >= 15) {
-                    $nilai->status = "Sangat Baik";
-                } else if ($jarak >= 10) {
-                    $nilai->status = "Baik";
+                    $nilais->keterangan = "lulus";
+                if ($nilai == 100) {
+                    $nilais->status = "Sangat Baik";
+                }
+                else if ($jarak >= 15) {
+                    $nilais->status = "Sangat Baik";
+                } 
+                 else if ($jarak >= 10) {
+                    $nilais->status = "Baik";
                 } else if ($jarak >= 5) {
-                    $nilai->status = "Cukup";
+                    $nilais->status = "Cukup";
                 } else {
-                    $nilai->status = "Kurang";
+                    $nilais->status = "Kurang";
                 }
             } else {
-                $nilai->status = "Belum Tuntas";
+                $nilais->status = "Belum Tuntas";
+                $nilais->keterangan = "belum lulus";
             }
 
-        $nilai->save();
+        $nilais->save();
         
-        return response()->json($nilai);
-        // $nilai->save();
-        // return response()->json([
-        //     'data' => $nilai,
-        //     'message'=>"data berhasil diperbarui"
-        // ]); 
+        return response()->json($nilais);
+
     }
 
     /**

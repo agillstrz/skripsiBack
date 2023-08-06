@@ -31,7 +31,7 @@ class SiswaAkademikController extends Controller
     }
     public function jadwalPelajaran(Request $request) { 
 
-        $profile = Jadwal::where('kelas_id', $request->kelas_id)->with(['kelas','pelajaran','guru'])->latest()->get();
+        $profile = Jadwal::where('kelas_id', $request->kelas_id)->with(['kelas','pelajaran','guru'])->get();
         return response()->json([
             'data' => $profile
         ]);

@@ -39,7 +39,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('auth/register', [RegisterController::class, 'Register']);
+Route::post('auth/TambahSiswBaru', [RegisterController::class, 'TambahSiswBaru']);
 Route::post('auth/login', [LoginController::class,'Login']);
+Route::post('auth/ubah-password', [RegisterController::class,'ubahPassword'])->middleware('auth:sanctum');
 
 
 Route::post('kategori', [KategoriBeritaController::class, 'store']);
@@ -121,6 +123,7 @@ Route::get('dashboard', [AdminViewController::class, 'dashboard']);
 Route::get('semesterPublish', [AdminViewController::class, 'semesterPublish']);
 Route::post('semester', [SemesterController::class, 'store']);
 Route::get('semester', [SemesterController::class, 'index']);
+Route::put('semester/{id}', [SemesterController::class, 'update']);
 Route::get('semesterSekarang', [SemesterController::class, 'semesterSekarang']);
 
 Route::post('jadwalUjian', [JadwalUjianController::class, 'store']);

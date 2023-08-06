@@ -17,15 +17,14 @@ class NilaiJadwalController extends Controller
         ->where('kelas_id', $request->kelas_id)
         ->latest()
         ->get();
-
         $uniqueJadwal = $jadwal->unique(function ($item) {
         return $item->pelajaran_id;
     });
+    
     $siswa = Siswa::where('kelas_id', $request->kelas_id)->get();
 
     $cekNilaiSemester = Nilai::where('kelas_id', $request->kelas_id)->where('semester_id', $request->semester_id)->exists();
     if(!$cekNilaiSemester){
-   
         foreach($siswa as $siswas){
             $pembayaran =  Pembayaran::create([
                 'siswa_id' => $siswas->id,
@@ -40,7 +39,6 @@ class NilaiJadwalController extends Controller
                     'kelas_id' => $request->kelas_id,
                     'siswa_id' => $siswas->id,
                     'nilai' => 0,
-                    'keterangan' => ""
                 ]);
     
                 $nnilaiUjian =  NilaiUjian::create([
@@ -49,14 +47,20 @@ class NilaiJadwalController extends Controller
                     'kelas_id' => $request->kelas_id,
                     'siswa_id' => $siswas->id,
                     'nilai' => 0,
-                    'keterangan' => ""
                 ]); 
             }
         }
+        return response()->json([
+            'message' => 'Nilai berhasil ditambahkan'
+        ]);
+
         } else{
-            return response()->json('Nilai Sudah Dibuat');
+            return response()->json([
+                'message' => 'Nilai Sudah Dibuat'
+            ]);
         }
     }
+  
 
 
   

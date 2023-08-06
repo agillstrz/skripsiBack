@@ -16,9 +16,17 @@ class SemesterController extends Controller
         return response()->json($semester);
     }
     
+    public function update($id, Request $request){
+        $semester = Semester::find($id);
+        $semester->nama = $request->nama;
+        $semester->save();
+        return response()->json($semester);
+    }
+    
     public function store(Request $request){
-    $semester = Semester::create();
-
+    $semester = Semester::create([
+        'nama' => $request->nama,
+    ]);
     return response()->json([
         'data' => $semester,
         'message'=>"data berhasil ditambahkan"
