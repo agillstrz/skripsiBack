@@ -13,7 +13,7 @@ class JadwalController extends Controller
      */
     public function index(Request $request)
     {
-        $jadwal = Jadwal::with(['guru','pelajaran','kelas'])->where('kelas_id', $request->kelas_id)->paginate(10);
+        $jadwal = Jadwal::with(['guru','pelajaran','kelas'])->where('kelas_id', $request->kelas_id)->paginate(25);
         return response()->json([
             'data' => $jadwal
         ]);
