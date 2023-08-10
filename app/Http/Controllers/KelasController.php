@@ -12,7 +12,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::latest()->paginate(10);
+        $kelas = Kelas::latest()->paginate(20);
         return response()->json([
             'data' => $kelas
         ]);

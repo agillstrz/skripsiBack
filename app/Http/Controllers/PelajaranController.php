@@ -12,7 +12,7 @@ class PelajaranController extends Controller
      */
     public function index()
     {
-        $pelajaran = Pelajaran::latest()->paginate(5);
+        $pelajaran = Pelajaran::latest()->get();
         return response()->json([
             'data' => $pelajaran
         ]);

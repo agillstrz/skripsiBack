@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Pelajaran;
@@ -30,6 +31,7 @@ public function semuaSiswa(Request $request) {
 }
 public function dashboard() {
     $siswa = Siswa::count();
+    $berita = Berita::count();
     $guru = Guru::count();
     $kelas = Kelas::count();
     $Pelajaran = Pelajaran::count();
@@ -38,6 +40,7 @@ public function dashboard() {
         'guru' => $guru,
         'kelas' => $kelas,
         'pelajaran' => $Pelajaran,
+        'berita' => $berita,
     ]);
 }
 }

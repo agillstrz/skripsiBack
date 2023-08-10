@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -12,7 +13,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::with('kelas')->latest()->paginate(5);
+        $siswa = Siswa::with('kelas')->latest()->paginate(25);
         return response()->json([
             'data' => $siswa
         ]);
@@ -86,8 +87,10 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        $guru = Siswa::find($id);
-        $guru->delete();
+        $siswa = Siswa::find($id);
+        $user = User::find($id);
+        $siswa->delete();
+        $user->delete();
         return response()->json([
             'Message' => "produk berhasil dihapus"
         ]);
